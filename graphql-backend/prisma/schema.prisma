@@ -1,0 +1,41 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+    id String @db.VarChar(26) @id
+    name String @db.VarChar(256)
+    createdAt DateTime @db.Timestamptz
+
+    posts Post[]
+    @@map("users")
+}
+
+model Post {
+    id String @db.VarChar(26) @id
+    postUserId String @db.VarChar(26)
+    postUser User @relation(fields: [postUserId], references: [id])
+    title String @db.VarChar(256)
+    body String @db.Text
+
+    postStatusActivities PostStatusActivity[]
+
+    @@map("posts")
+}
+
+model PostStatusActivity {
+    postId String @db.VarChar(26) @id @map("post_id")
+    post Post @relation(fields: [postId], references: [id])
+    status String @db.VarChar(256)
+    createdAt DateTime @db.Timestamptz
+
+    @@map("post_status_activities")
+}

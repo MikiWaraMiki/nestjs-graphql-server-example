@@ -1,6 +1,8 @@
+/docker/postgres
+
 # compiled output
-/dist
-/node_modules
+graphql-backend/dist
+graphql-backend/node_modules
 
 # Logs
 logs
@@ -15,8 +17,8 @@ lerna-debug.log*
 .DS_Store
 
 # Tests
-/coverage
-/.nyc_output
+graphql-backend/coverage
+graphql-backend/.nyc_output
 
 # IDEs and editors
 /.idea
