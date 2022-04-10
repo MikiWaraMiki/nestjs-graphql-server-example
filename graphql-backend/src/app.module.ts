@@ -6,6 +6,7 @@ import { cwd } from 'process';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PostResolver } from './graphql/resolver/post.resolver';
+import { UserResolver } from './graphql/resolver/user.resolver';
 import { PrismaService } from './prisma/prisma.service';
 
 @Module({
@@ -16,6 +17,6 @@ import { PrismaService } from './prisma/prisma.service';
     }),
   ],
   controllers: [AppController],
-  providers: [AppService, PrismaService, PostResolver],
+  providers: [AppService, PrismaService, PostResolver, UserResolver],
 })
 export class AppModule {}

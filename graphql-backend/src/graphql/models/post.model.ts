@@ -12,8 +12,6 @@ export class Post {
   @Field()
   body: string;
 
-  /*
   @Field((_type) => User)
   user: User;
-  */
 }

@@ -2,12 +2,32 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type User {
+  id: ID!
+  name: String!
+  createdAt: DateTime!
+  posts: [Post!]!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 type Post {
   id: ID!
   title: String!
   body: String!
+  user: User!
 }
 
 type Query {
   posts: [Post!]!
+  users(id: String!): User!
+}
+
+type Mutation {
+  createPost(userId: String!, title: String!, body: String!): Post!
+  updateUser(id: String!, name: String!): User!
+  createUser(name: String!): User!
 }
