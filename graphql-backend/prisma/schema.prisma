@@ -15,6 +15,8 @@ model User {
     name String @db.VarChar(256)
     createdAt DateTime @db.Timestamptz
 
+    taggedPhotos PhotoTaggedUser[]
+
     posts Post[]
     @@map("users")
 }
@@ -38,4 +40,30 @@ model PostStatusActivity {
     createdAt DateTime @db.Timestamptz
 
     @@map("post_status_activities")
+}
+
+
+model Photo {
+    id String @db.VarChar(26) @id
+    postUserId String @db.VarChar(26) @map("post_user_id")
+    url String @db.VarChar(256)
+    createdAt DateTime @db.Timestamptz @map("created_at")
+
+    photoTaggedUsers PhotoTaggedUser[]
+
+    @@map("photos")
+}
+
+model PhotoTaggedUser {
+  photoId String @db.VarChar(26) @map("photo_id")
+  photo Photo @relation(fields: [photoId], references: [id])
+
+  taggedUserId String @db.VarChar(26) @map("tagged_user_id")
+  taggedUser User @relation(fields: [taggedUserId], references: [id])
+
+  createdAt DateTime @db.Timestamptz @map("created_at")
+
+  @@id([photoId, taggedUserId])
+
+  @@map("photo_tagged_user")
 }
